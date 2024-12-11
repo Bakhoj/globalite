@@ -98,3 +98,20 @@ class _Globalite:
             for item in cursor.fetchall():
                 keys.add(item[0])
         return keys
+
+    def flush_database(self) -> None:
+        '''
+            Will flush the database file, meaning it will do the fsync system call
+            that makes sure the database file is written to disk.
+
+            OBS use with caution and only when a value is at risk of being forgotten by
+            a soon thereafter power outage. The operation is more expensive, performance-wise,
+            than normal save.
+
+            The OS does these for the full system regularly so it is only needed in rare occasions.
+
+            https://www.tutorialspoint.com/python/os_fsync.htm
+            https://www.sqlite.org/atomiccommit.html (9.2 Incomplete Disk Flushes)
+        '''
+        with open(self.db_file) as f:
+            os.fsync(f)
