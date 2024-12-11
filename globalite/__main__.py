@@ -1,22 +1,9 @@
 from dataclasses import dataclass
-from typing import Optional
-import sqlite3
+from .connection_manager import _ConnectionManager
 
 def get_default_globalite() -> "_Globalite":
     return _Globalite("settings.db", "globals")
 
-class _ConnectionManager:
-
-    def __init__(self, glob: "_Globalite"):
-        self._glob: _Globalite = glob
-        self._conn: Optional[sqlite3.Connection] = None
-
-    def __enter__(self) -> tuple[sqlite3.Connection, sqlite3.Cursor]:
-        self._conn = sqlite3.connect(self._glob.db_file)
-        return self._conn, self._conn.cursor()
-    
-    def __exit__(self, *_):
-        self._conn.close()
 
 @dataclass
 class _Globalite:
