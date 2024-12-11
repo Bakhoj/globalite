@@ -1,7 +1,7 @@
 import os
 from tests import TempDirFixture
 from unittest import TestCase
-from globalite.globalite import _Globalite
+from tests.context import globalite
 
 _test_db = "test.db"
 _test_table = "globals"
