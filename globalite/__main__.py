@@ -89,3 +89,12 @@ class _Globalite:
                 query = f"DELETE FROM {self.table_name} WHERE key = ?"
                 cursor.execute(query, (__name,))
                 conn.commit()
+
+    def keys(self) -> set:
+        keys: set[str] = set()
+        with self.get_connection() as (conn, cursor):
+            query = f"SELECT key FROM {self.table_name}"
+            cursor.execute(query)
+            for item in cursor.fetchall():
+                keys.add(item[0])
+        return keys
