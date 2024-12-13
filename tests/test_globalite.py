@@ -2,7 +2,7 @@ import os
 import unittest
 from tests import TempDirFixture
 from unittest import TestCase
-from types import NoneType
+from __future__ import annotations
 from tests.context import globalite
 
 _test_db = "test.db"
@@ -78,13 +78,13 @@ class TestGlobalite(TempDirFixture, TestCase):
         self.assertEqual(type(_var_dict), dict)
         self.assertEqual(_var_dict, {"valueDictInt": 2})
 
-        _var_none: NoneType = _var_test_dict["valueNone"]
-        self.assertEqual(type(_var_none), NoneType)
+        _var_none: None = _var_test_dict["valueNone"]
+        self.assertEqual(type(_var_none), None)
         self.assertIsNone(_var_none)
 
     def test_read_nonetype(self):
-        _var_none = self.globalite.test_nonetype
-        self.assertEqual(type(_var_none), NoneType)
+        _var_none: None = self.globalite.test_nonetype
+        self.assertEqual(type(_var_none), None)
         self.assertIsNone(_var_none)
 
     def test_write_int(self):
