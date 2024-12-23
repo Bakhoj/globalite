@@ -1,8 +1,10 @@
+from __future__ import annotations
 import os
 import unittest
+import NoneType
 from tests import TempDirFixture
 from unittest import TestCase
-from __future__ import annotations
+
 from tests.context import globalite
 
 _test_db = "test.db"
@@ -148,6 +150,12 @@ class TestGlobalite(TempDirFixture, TestCase):
         with self.assertRaises(AttributeError):
             self.globalite.test_dict["valueInt"]
 
+
+    def test_read_not_initiated_variable(self):
+        pass
+
+    def test_get_key_set(self):
+        pass
 
 class TestGlobaliteInitialization(TestCase):
     pass
