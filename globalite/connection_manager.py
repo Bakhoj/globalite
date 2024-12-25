@@ -1,5 +1,8 @@
-import sqlite3
+from __future__ import annotations
 from typing import Optional
+import sqlite3
+
+
 
 class _ConnectionManager:
 
@@ -10,6 +13,6 @@ class _ConnectionManager:
     def __enter__(self) -> tuple[sqlite3.Connection, sqlite3.Cursor]:
         self._conn = sqlite3.connect(self._globalite.db_file)
         return self._conn, self._conn.cursor()
-    
+
     def __exit__(self, *_):
         self._conn.close()
