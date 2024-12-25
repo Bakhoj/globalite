@@ -149,9 +149,9 @@ class TestGlobalite(TempDirFixture, TestCase):
         with self.assertRaises(AttributeError):
             self.globalite.test_dict["valueInt"]
 
-
     def test_read_not_initiated_variable(self):
-        pass
+        with self.assertRaises(AttributeError):
+            self.globalite._not_init_variable
 
     def test_get_key_set(self):
         pass
