@@ -162,6 +162,16 @@ class TestGlobalite(TempDirFixture, TestCase):
 
         self.assertEqual(_amount_of_keys, len(_keys))
 
+    def test_flush_database(self):
+        '''
+            Test if flush_database crashes.
+
+            This method is closely hardware related and needs to be tested based on OS and hardware.
+            Therefore this test just ensures that the method can be called and doesn't crash.
+
+        '''
+        self.globalite.flush_database()
+
 class TestGlobaliteInitialization(TestCase):
     pass
 
