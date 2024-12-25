@@ -1,7 +1,6 @@
 from __future__ import annotations
 import os
 import unittest
-import NoneType
 from tests import TempDirFixture
 from unittest import TestCase
 
@@ -11,7 +10,7 @@ _test_db = "test.db"
 _test_table = "globals"
 
 class TestGlobalite(TempDirFixture, TestCase):
-    
+
     def setUp(self):
         super().setUp()
 
@@ -33,7 +32,7 @@ class TestGlobalite(TempDirFixture, TestCase):
     def tearDown(self):
         if os.path.isfile(_test_db):
             os.remove(_test_db)
-        
+
         super().tearDown()
 
     def test_read_int(self):
@@ -81,12 +80,12 @@ class TestGlobalite(TempDirFixture, TestCase):
         self.assertEqual(_var_dict, {"valueDictInt": 2})
 
         _var_none: None = _var_test_dict["valueNone"]
-        self.assertEqual(type(_var_none), None)
+        self.assertIsInstance(_var_none, type(None))
         self.assertIsNone(_var_none)
 
     def test_read_nonetype(self):
         _var_none: None = self.globalite.test_nonetype
-        self.assertEqual(type(_var_none), None)
+        self.assertIsInstance(_var_none, type(None))
         self.assertIsNone(_var_none)
 
     def test_write_int(self):
@@ -119,7 +118,7 @@ class TestGlobalite(TempDirFixture, TestCase):
         _temp_dict = self.globalite._var_dict = {"varStr": "dict String", "varInt": 6}
         self.assertEqual(_temp_dict, self.globalite._var_dict)
         self.assertIs(_temp_dict, self.globalite._var_dict)
-        
+
 
     def test_write_nonetype(self):
         '''
@@ -143,7 +142,7 @@ class TestGlobalite(TempDirFixture, TestCase):
     def test_delete_in_dict(self):
         self.globalite.test_dict["valueInt"]
         del self.globalite.test_dict["valueInt"]
-        
+
         self.assertEqual(self.globalite.test_dict, self.globalite.test_dict)
         self.assertIs(self.globalite.test_dict, self.globalite.test_dict)
 
