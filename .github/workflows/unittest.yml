@@ -10,7 +10,7 @@ jobs:
   test:
     name: run python unittests
     
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     strategy:
       matrix:
         python-versions: ["3.8", "3.9", "3.10"]
