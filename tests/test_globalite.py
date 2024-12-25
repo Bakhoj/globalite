@@ -154,7 +154,13 @@ class TestGlobalite(TempDirFixture, TestCase):
             self.globalite._not_init_variable
 
     def test_get_key_set(self):
-        pass
+        _amount_of_keys = 6
+        _expected_keys = ["test_int", "test_float", "test_string", "test_bool", "test_dict", "test_nonetype"]
+        _keys: set = self.globalite.keys()
+        for key in _keys:
+            self.assertIn(key, _expected_keys)
+
+        self.assertEqual(_amount_of_keys, len(_keys))
 
 class TestGlobaliteInitialization(TestCase):
     pass
