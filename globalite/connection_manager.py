@@ -11,7 +11,7 @@ class _ConnectionManager:
         self._conn: Optional[sqlite3.Connection] = None
 
     def __enter__(self) -> tuple[sqlite3.Connection, sqlite3.Cursor]:
-        self._conn = sqlite3.connect(self._globalite.db_file)
+        self._conn = sqlite3.connect(self._globalite._gl_db_file)
         return self._conn, self._conn.cursor()
 
     def __exit__(self, *_):
