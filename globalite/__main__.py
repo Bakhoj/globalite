@@ -10,11 +10,18 @@ def get_default_globalite() -> "_Globalite":
 
 @dataclass
 class _Globalite:
+
+    __protected_names = [
+        "keys",
+        "flush_database",
+        "_globalite_variables"
+    ]
+
     def __init__(self, db_file: str, table_name: str):
         self._globalite_variables = {
             "db_file": db_file,
             "table_name": table_name,
-            "connection_manager": _ConnectionManager(db_file)
+            "connection_manager": _ConnectionManager(db_file),
         }
 
         self._create_table_if_not_exists()
@@ -42,6 +49,8 @@ class _Globalite:
     def __setattr__(self, __name: str, __value) -> None:
         if __name == "_globalite_variables" or __name in self._globalite_variables.keys():
             super().__setattr__(__name, __value)
+        elif __name in _Globalite.__protected_names:
+            raise NameError("Attribute name can not be the same as an existing function")
         else:
             with self.__get_connection() as (conn, cursor):
                 query = f"INSERT OR REPLACE INTO {self._globalite_variables.get('table_name')} (key, value, type) VALUES(?, ?, ?)"

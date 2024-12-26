@@ -172,6 +172,26 @@ class TestGlobalite(TempDirFixture, TestCase):
         '''
         self.globalite.flush_database()
 
+    def test_method_names(self):
+        '''
+            Test if the names used for the methods in Globalite
+            is protected properly
+        '''
+        # Globalite.keys
+        _temp_func_type = type(self.globalite.keys)
+        with self.assertRaises(NameError):
+            self.globalite.keys = "string for keys"
+
+        self.assertEqual(type(self.globalite.keys), _temp_func_type)
+
+        # Globalite.flush_database
+        _temp_func_type = type(self.globalite.flush_database)
+        with self.assertRaises(NameError):
+            self.globalite.flush_database = "string for flush database"
+
+        self.assertEqual(type(self.globalite.flush_database), _temp_func_type)
+
+
 class TestGlobaliteInitialization(TestCase):
     pass
 
