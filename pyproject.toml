@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "globalite"
-version = "0.0.1"
+version = "0.0.1test"
 authors = [
     { name="Bakhoj", email="anders2108@gmail.com" },
 ]
