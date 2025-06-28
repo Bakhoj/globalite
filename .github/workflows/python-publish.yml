@@ -58,6 +58,7 @@ jobs:
       - name: Publish release distributions to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
+          verbose: true
           packages-dir: dist/
 
   test-pypi-publish:
